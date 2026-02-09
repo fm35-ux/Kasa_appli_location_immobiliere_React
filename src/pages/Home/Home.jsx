@@ -1,4 +1,15 @@
+import Banner from '../../components/Banner/Banner'
+import bannerImage from '../../assets/images/banner-home.png'
+
+
 function Home() {
-    return <h1>Bienvenue sur Kasa</h1>
+    return (
+        <div className="home">
+            <Banner
+                image={bannerImage}
+                text="Chez vous, partout et ailleurs"
+            />
+        </div>
+    )
 }
 export default Home
