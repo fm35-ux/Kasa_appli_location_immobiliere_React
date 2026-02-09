@@ -3,16 +3,20 @@ import Home from './pages/Home/Home'
 import About from './pages/About/About'
 import Error from './pages/Error/Error'
 import Housing from './pages/Housing/Housing'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 function App() {
     return (
         <Router>
+            <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/housing" element={<Housing />} />
                 <Route path="*" element={<Error />} />
             </Routes>
+            <Footer />
         </Router>
     )
 }
