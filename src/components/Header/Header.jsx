@@ -6,9 +6,7 @@ import './Header.css'
 function Header() {
     return (
         <header className="header">
-            <NavLink to="/">
-                <img src={logo} alt="Logo Kasa" className="header-logo" />
-            </NavLink>
+            <img src={logo} alt="Logo Kasa" className="header-logo" />
             <nav className="nav">
                 <NavLink to="/" className={({ isActive }) => isActive ? "nav-link-active" : "nav-link"}>
                     Accueil

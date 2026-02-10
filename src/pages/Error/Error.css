@@ -1,0 +1,52 @@
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #FF6060;
+    margin-top: 100px;
+    text-align: center;
+}
+
+
+.error-code {
+    font-size: 288px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.error-message {
+    font-size: 36px;
+    color: #FF6060;
+    margin: 100px 0;
+}
+
+.error-link {
+    color: black;
+    text-decoration: underline;
+    font-size: 18px;
+    margin: 50px 0 100px;
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+
+    .error-container {
+        margin-top: 50px;
+    }
+
+    .error-code {
+        font-size: 96px;
+        margin: 40px 0;
+    }
+
+    .error-message {
+        font-size: 18px;
+        font-weight: 500;
+        margin: 50px 30px 15px;
+    }
+
+    .error-link {
+        font-size: 16px;
+    }
+}

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 40px 100px;
 }
 
 .header-logo {
@@ -20,7 +20,6 @@
     color: black;
     font-size: 24px;
     font-weight: 500;
-    font-family: 'montserrat', sans-serif;
 }
 
 .nav-link-active {
@@ -28,13 +27,13 @@
     color: black;
     font-size: 24px;
     font-weight: 500;
-    font-family: 'montserrat', sans-serif;
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
     .header {
-        padding: 5px;
+        padding: 15px;
+        margin-top: 10px;
     }
 
     .header-logo {
@@ -47,7 +46,7 @@
 
     .nav-link,
     .nav-link-active {
-        font-size: 18px;
+        font-size: 15px;
         margin-left: 0;
     }
 }
