@@ -1,0 +1,55 @@
+.collapse {
+    width: 100%;
+}
+
+.collapse-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #FF6060;
+    color: white;
+    border-radius: 5px;
+}
+
+.collapse h3 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.collapse-arrow {
+    width: 30px;
+    height: 30px;
+}
+
+.collapse-content {
+    font-size: 17px;
+    font-weight: 400;
+    padding: 15px;
+    background-color: #F6F6F6;
+    border-radius: 5px;
+    line-height: 1.4;
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+    .collapse-header {
+        height: 30px;
+        padding: 5px 15px;
+    }
+
+    .collapse-content {
+        font-size: 12px;
+    }
+
+    .collapse h3 {
+        font-size: 13px;
+    }
+
+    .collapse-arrow {
+        width: 20px;
+        height: 20px;
+    }
+}
