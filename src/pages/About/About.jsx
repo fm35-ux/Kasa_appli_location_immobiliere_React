@@ -1,4 +1,13 @@
+import bannerImage from '../../assets/images/banner-about.png'
+import Banner from '../../components/Banner/Banner'
+
 function About() {
-    return <h1>A propos</h1>
+    return (
+        <div className="home">
+            <Banner
+                image={bannerImage}
+            />
+        </div>
+    )
 }
 export default About

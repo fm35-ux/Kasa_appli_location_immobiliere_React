@@ -1,0 +1,22 @@
+.housing-container {
+    width: calc(100% - 200px);
+    background-color: #F6F6F6;
+    border-radius: 25px;
+    margin: 43px auto;
+    padding: 56px 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .housing-container {
+        width: 100%;
+        background-color: transparent;
+        padding: 20px;
+        margin: 22px 0;
+        gap: 20px;
+    }
+}
