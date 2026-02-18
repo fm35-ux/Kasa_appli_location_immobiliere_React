@@ -27,7 +27,7 @@ function Home() {
             />
             <section className="housing-container">
                 {properties.map(({ id, title, cover }) => (
-                    <Card key={id} title={title} cover={cover} />
+                    <Card key={id} id={id} title={title} cover={cover} />
                 ))}
             </section>
         </div>
