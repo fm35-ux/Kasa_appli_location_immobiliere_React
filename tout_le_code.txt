@@ -1,0 +1,918 @@
+﻿========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\App.jsx ==========
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home/Home'
+import About from './pages/About/About'
+import Error from './pages/Error/Error'
+import Housing from './pages/Housing/Housing'
+import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
+
+function App() {
+    return (
+        <Router>
+            <Header />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/housing/:id" element={<Housing />} />
+                <Route path="*" element={<Error />} />
+            </Routes>
+            <Footer />
+        </Router>
+    )
+}
+export default App
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\components\Banner\Banner.css ==========
+.banner {
+    position: relative;
+    width: calc(100% - 200px);
+    height: 223px;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 43px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.30);
+    margin-bottom: 40px;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+
+}
+
+.banner-text {
+    position: relative;
+    color: white;
+    font-size: 50px;
+    font-weight: 700;
+    text-align: center;
+    z-index: 2;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000,
+        0px -1px 0 #000,
+        0px 1px 0 #000,
+        -1px 0px 0 #000,
+        1px 0px 0 #000;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .banner {
+        width: calc(100% - 40px);
+        height: 111px;
+        border-radius: 10px;
+        margin: 20px auto 18px;
+    }
+
+    .banner-overlay {
+        border-radius: 10px;
+    }
+
+    .banner-text {
+        font-size: 24px;
+        padding: 0 15px;
+        text-align: left;
+        -webkit-text-stroke: 0.1px white;
+    }
+}
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\components\Banner\Banner.jsx ==========
+import './Banner.css';
+
+
+function Banner({ image, text }) {
+    return (
+        <div className="banner">
+            <img src={image} alt="BanneriÃ¨re Kasa" className="banner-img" />
+            <div className="banner-overlay"></div>
+            <h1 className="banner-text">{text}</h1>
+        </div>
+    );
+}
+
+export default Banner;
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\components\Card\Card.css ==========
+.card {
+    width: calc((100% - 120px) / 3);
+    height: 340px;
+    background-color: #FF6060;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.card-title {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+    width: 55%;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .card {
+        width: 100%;
+        max-width: 100%;
+        height: 255px;
+    }
+
+    .card-title {
+        font-size: 18px;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        max-width: 50%;
+    }
+}
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\components\Card\Card.jsx ==========
+import './Card.css';
+import { useNavigate } from 'react-router-dom';
+
+function Card({ title, cover, id }) {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/housing/${id}`);
+    }
+
+    return (
+        <div className="card" onClick={handleClick}>
+            <img src={cover} alt={title} className="card-img" />
+            <h3 className="card-title">{title}</h3>
+        </div>
+    );
+}
+
+export default Card;
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\components\Carousel\Carousel.css ==========
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 415px;
+    border-radius: 25px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.carousel-img {
+    width: 100%;
+    height: 415px;
+    object-fit: cover;
+}
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.arrow-left {
+    left: 24px;
+}
+
+.arrow-right {
+    right: 24px;
+}
+
+.carousel-counter {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 24px;
+    color: white;
+    padding: 4px 8px;
+    font-size: 18px;
+}
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\components\Carousel\Carousel.jsx ==========
+import { useState } from 'react'
+import './Carousel.css'
+import leftArrow from '../../assets/images/arrow-left.png'
+import rightArrow from '../../assets/images/arrow-right.png'
+
+function Carousel({ pictures }) {
+    const [index, setIndex] = useState(0)
+
+    function nextSlide() {
+        setIndex(index === pictures.length - 1 ? 0 : index + 1)
+    }
+
+    function previousSlide() {
+        setIndex(index === 0 ? pictures.length - 1 : index - 1)
+    }
+
+    if (pictures.length === 1) {
+        return (
+            <div className="carousel">
+                <img src={pictures[0]} alt="logement" className="carousel-img" />
+            </div>
+        )
+    }
+
+    return (
+        <div className="carousel">
+            <button className="carousel-arrow arrow-left" onClick={previousSlide}>
+                <img src={leftArrow} alt="flÃ¨che gauche" />
+            </button>
+
+            <img src={pictures[index]} alt="logement" className="carousel-img" />
+
+            <button className="carousel-arrow arrow-right" onClick={nextSlide}>
+                <img src={rightArrow} alt="flÃ¨che droite" />
+            </button>
+
+            <span className="carousel-counter">{index + 1}/{pictures.length}</span>
+        </div>
+    )
+}
+
+export default Carousel
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\components\Collapse\Collapse.css ==========
+.collapse {
+    width: 100%;
+}
+
+.collapse-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #FF6060;
+    color: white;
+    border-radius: 5px;
+}
+
+.collapse h3 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.collapse-arrow {
+    width: 30px;
+    height: 30px;
+}
+
+.collapse-content {
+    font-size: 17px;
+    font-weight: 400;
+    padding: 15px;
+    background-color: #F6F6F6;
+    border-radius: 5px;
+    line-height: 1.4;
+    color: black;
+}
+
+.collapse-content ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    color: black;
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+    .collapse-header {
+        height: 30px;
+        padding: 5px 15px;
+    }
+
+    .collapse-content {
+        font-size: 12px;
+    }
+
+    .collapse h3 {
+        font-size: 13px;
+    }
+
+    .collapse-arrow {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\components\Collapse\Collapse.jsx ==========
+import { useState } from 'react';
+import arrowUp from '../../assets/images/arrow-up.png'
+import arrowDown from '../../assets/images/arrow-down.png'
+import './Collapse.css'
+
+function Collapse({ title, content }) {
+    const [isOpen, setIsOpen] = useState(false)
+
+    return (
+        <div className="collapse">
+            <div className="collapse-header" onClick={() => setIsOpen(!isOpen)}>
+                <h3>{title}</h3>
+                <img src={isOpen ? arrowDown : arrowUp} alt="arrows" className="collapse-arrow" />
+            </div>
+            {isOpen && <div className="collapse-content">{content}</div>}
+        </div>
+    )
+}
+
+export default Collapse;
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\components\Footer\Footer.css ==========
+.footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 66px 0 30px;
+    gap: 30px;
+    margin-top: auto;
+}
+
+.footer-logo {
+    height: 40px;
+}
+
+.footer-copyright {
+    font-size: 24px;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+
+    .footer {
+        padding: 60px 0 58px;
+        gap: 7px;
+    }
+
+    .footer-logo {
+        width: 100px;
+        height: auto;
+    }
+
+    .footer-copyright {
+        font-size: 12px;
+        max-width: 120px;
+        line-height: 143%;
+        font-weight: 400;
+        text-align: center;
+    }
+}
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\components\Footer\Footer.jsx ==========
+import logo from '../../assets/images/logo-footer.svg'
+import './Footer.css'
+
+function Footer() {
+    return (
+        < footer className="footer" >
+            <img src={logo} alt="Logo Kasa" className="footer-logo" />
+            <p className="footer-copyright">Â© 2020 Kasa. All rights reserved</p>
+        </footer >
+    )
+}
+
+export default Footer   
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\components\Header\Header.css ==========
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 100px;
+}
+
+.header-logo {
+    height: 68px;
+}
+
+.nav {
+    display: flex;
+    gap: 57px;
+}
+
+.nav-link {
+    margin-left: 20px;
+    text-decoration: none;
+    color: black;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.nav-link-active {
+    text-decoration: underline;
+    color: black;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .header {
+        padding: 19px 20px 5px 20px;
+        margin-top: 10px;
+    }
+
+    .header-logo {
+        height: 47px;
+    }
+
+    .nav {
+        gap: 26px;
+    }
+
+    .nav-link,
+    .nav-link-active {
+        font-size: 15px;
+        margin-left: 0;
+    }
+}
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\components\Header\Header.jsx ==========
+import { NavLink } from 'react-router-dom'
+import logo from '../../assets/images/logo.svg'
+import './Header.css'
+
+
+function Header() {
+    return (
+        <header className="header">
+            <img src={logo} alt="Logo Kasa" className="header-logo" />
+            <nav className="nav">
+                <NavLink to="/" className={({ isActive }) => isActive ? "nav-link-active" : "nav-link"}>
+                    Accueil
+                </NavLink>
+                <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link-active" : "nav-link"}>
+                    A propos
+                </NavLink>
+            </nav>
+        </header>
+    )
+}
+
+export default Header
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\index.css ==========
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+#root,
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\main.jsx ==========
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\pages\About\About.css ==========
+.about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.about-container {
+    width: 100%;
+    max-width: 1023px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+    .about-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 19px;
+        margin-bottom: 20px;
+        gap: 20px;
+    }
+}
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\pages\About\About.jsx ==========
+import bannerImage from '../../assets/images/banner-about.png'
+import Banner from '../../components/Banner/Banner'
+import Collapse from '../../components/Collapse/Collapse'
+import './About.css'
+
+function About() {
+    return (
+        <main>
+            <div className="about">
+                <Banner
+                    image={bannerImage}
+                />
+                <div className="about-container">
+                    <Collapse
+                        title="FiabilitÃ©"
+                        content="Les annonces postÃ©es sur Kasa garantissent une fiabilitÃ© totale. Les photos sont conformes aux logements, 
+                        et toutes les informations sont rÃ©guliÃ¨rement vÃ©rifiÃ©es par nos Ã©quipes." />
+                    <Collapse
+                        title="Respect"
+                        content="La bienveillance fait partie des valeurs fondatrices de Kasa. Tout comportement discriminatoire ou 
+                        de perturbation du voisinage entraÃ®nera une exclusion de notre plateforme." />
+                    <Collapse
+                        title="Service"
+                        content="La qualitÃ© du service est au cÅ“ur de notre engagement chez Kasa. Nous veillons Ã  ce que chaque interaction, 
+                        que ce soit avec nos hÃ´tes ou nos locataires, soit empreinte de respect et de bienveillance." />
+                    <Collapse
+                        title="SÃ©curitÃ©"
+                        content="La sÃ©curitÃ© est la prioritÃ© de Kasa. Aussi bien pour nos hÃ´tes que pour les voyageurs, 
+                        chaque logement correspond aux critÃ¨res de sÃ©curitÃ© Ã©tablis par nos services. 
+                        En laissant une note aussi bien Ã  l'hÃ´te qu'au locataire, cela permet Ã  nos Ã©quipes de vÃ©rifier que les standards sont bien respectÃ©s. 
+                        Nous organisons Ã©galement des ateliers sur la sÃ©curitÃ© domestique pour nos hÃ´tes." />
+                </div>
+            </div>
+        </main>
+    )
+}
+export default About
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\pages\Error\Error.css ==========
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #FF6060;
+    margin-top: 100px;
+    text-align: center;
+}
+
+
+.error-code {
+    font-size: 288px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.error-message {
+    font-size: 36px;
+    color: #FF6060;
+    margin: 100px 0;
+}
+
+.error-link {
+    color: black;
+    text-decoration: underline;
+    font-size: 18px;
+    margin: 50px 0 100px;
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+
+    .error-container {
+        margin-top: 50px;
+    }
+
+    .error-code {
+        font-size: 96px;
+        margin: 40px 0;
+    }
+
+    .error-message {
+        font-size: 18px;
+        font-weight: 500;
+        margin: 50px 30px 15px;
+    }
+
+    .error-link {
+        font-size: 16px;
+    }
+}
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\pages\Error\Error.jsx ==========
+import { Link } from "react-router-dom"
+import './Error.css'
+
+
+function Error() {
+    return (
+        <main>
+            <div className="error-container">
+                <h1 className="error-code">404</h1>
+                <p className="error-message">Oups! La page que vous demandez n'existe pas.</p>
+                <Link to="/" className="error-link">Retourner sur la page d'accueil</Link>
+            </div>
+        </main>
+    )
+}
+export default Error
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\pages\Home\Home.css ==========
+.housing-container {
+    width: calc(100% - 200px);
+    background-color: #F6F6F6;
+    border-radius: 25px;
+    margin: 43px auto;
+    padding: 56px 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .housing-container {
+        width: 100%;
+        background-color: transparent;
+        padding: 20px;
+        margin: 22px 0;
+        gap: 20px;
+    }
+}
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\pages\Home\Home.jsx ==========
+import { useEffect, useState } from 'react'
+import Banner from '../../components/Banner/Banner'
+import bannerImage from '../../assets/images/banner-home.png'
+import Card from '../../components/Card/Card'
+import './Home.css'
+
+
+function Home() {
+
+    const [properties, setProperties] = useState([])
+
+    useEffect(() => {
+        async function fetchData() {
+            const data = await fetch('http://localhost:8080/api/properties')
+            const parsedData = await data.json()
+            setProperties(parsedData)
+        }
+        fetchData()
+    }, [])
+
+
+    return (
+        <main>
+            <div className="home">
+                <Banner
+                    image={bannerImage}
+                    text="Chez vous, partout et ailleurs"
+                />
+                <section className="housing-container">
+                    {properties.map(({ id, title, cover }) => (
+                        <Card key={id} id={id} title={title} cover={cover} />
+                    ))}
+                </section>
+            </div>
+        </main>
+    )
+}
+export default Home
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\pages\Housing\Housing.css ==========
+.housing-page {
+    width: calc(100% - 200px);
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    color: #ff6060;
+}
+
+.housing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 30px;
+}
+
+.housing-header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.housing-header-left h1 {
+    font-size: 36px;
+    font-weight: 500;
+    color: #ff6060;
+}
+
+.housing-header-left p {
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+    margin-top: 10px;
+}
+
+.housing-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.tag-button {
+    background-color: #ff6060;
+    color: white;
+    border-radius: 10px;
+    padding: 3px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    min-width: 115px;
+    text-align: center;
+}
+
+.host-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0;
+}
+
+.host-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #ff6060;
+    width: 100px;
+    text-align: right;
+    line-height: 1.4;
+}
+
+.host-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.rating-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 13px;
+    margin-top: 20px;
+}
+
+.star {
+    width: 24px;
+    height: 24px;
+}
+
+.housing-collapse {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+    margin-top: 30px;
+}
+
+========== C:\Users\fanny\Desktop\Projet 8 OP\Kasa_appli_location_immobiliere_React\src\pages\Housing\Housing.jsx ==========
+import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import Collapse from '../../components/Collapse/Collapse'
+import Carousel from '../../components/Carousel/Carousel'
+import starFull from '../../assets/images/star-active.png'
+import starEmpty from '../../assets/images/star-inactive.png'
+import './Housing.css'
+
+
+function Housing() {
+    const { id } = useParams()
+    const navigate = useNavigate()
+    const [property, setProperty] = useState(null)
+
+    console.log(id)
+
+    useEffect(() => {
+        async function fetchData() {
+            const data = await fetch(`http://localhost:8080/api/properties/${id}`)
+            if (data.status === 404) {
+                navigate('/error')
+            } else {
+                const parsedData = await data.json()
+                setProperty(parsedData)
+            }
+        }
+        fetchData()
+    }, [id, navigate])
+
+    if (!property) return null
+
+    const stars = [1, 2, 3, 4, 5]
+    const housingScore = property.rating;
+
+    return (
+        <main className="housing-page">
+            <Carousel pictures={property.pictures} />
+
+            <div className="housing-header">
+
+                <div className="housing-header-left">
+                    <h1>{property.title}</h1>
+                    <p>{property.location}</p>
+
+                    <div className="housing-tags">
+                        {property.tags.map((tag) => (
+                            <span key={tag} className="tag-button">{tag}</span>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="housing-header-right">
+                    <div className="host-block">
+                        <p className="host-name">{property.host.name}</p>
+                        <img className="host-img" src={property.host.picture} alt="Portrait de l'hÃ´te" />
+                    </div>
+
+                    <div className="rating-container">
+                        {stars.map((number) => (
+                            housingScore >= number ? (
+                                <img key={number} src={starFull} alt="Ã©toile remplie" className="star" />
+                            ) : (
+                                <img key={number} src={starEmpty} alt="Ã©toile vide" className="star" />
+                            )
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <div className="housing-collapse">
+                <Collapse title="Description" content={property.description} />
+                <Collapse title="Equipements" content={
+                    <ul>
+                        {property.equipments.map((equipments) => (
+                            <li key={equipments}>{equipments}</li>
+                        ))}
+                    </ul>
+                } />
+            </div>
+        </main>
+    )
+
+}
+export default Housing
+

@@ -20,17 +20,19 @@ function Home() {
 
 
     return (
-        <div className="home">
-            <Banner
-                image={bannerImage}
-                text="Chez vous, partout et ailleurs"
-            />
-            <section className="housing-container">
-                {properties.map(({ id, title, cover }) => (
-                    <Card key={id} id={id} title={title} cover={cover} />
-                ))}
-            </section>
-        </div>
+        <main>
+            <div className="home">
+                <Banner
+                    image={bannerImage}
+                    text="Chez vous, partout et ailleurs"
+                />
+                <section className="housing-container">
+                    {properties.map(({ id, title, cover }) => (
+                        <Card key={id} id={id} title={title} cover={cover} />
+                    ))}
+                </section>
+            </div>
+        </main>
     )
 }
 export default Home
