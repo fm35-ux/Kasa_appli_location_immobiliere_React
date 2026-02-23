@@ -41,3 +41,38 @@
     padding: 4px 8px;
     font-size: 18px;
 }
+
+/*responsive design */
+@media (max-width: 768px) {
+    .carousel {
+        height: 255px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+    }
+
+    .carousel-img {
+        height: 255px;
+    }
+
+    .carousel-arrow img {
+        width: 15px;
+        height: auto;
+    }
+
+    .carousel-arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .carousel-counter {
+        display: none;
+    }
+
+    .arrow-left {
+        left: 16px;
+    }
+
+    .arrow-right {
+        right: 16px;
+    }
+}
