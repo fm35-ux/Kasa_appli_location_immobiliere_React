@@ -12,13 +12,12 @@ function Housing() {
     const navigate = useNavigate()
     const [property, setProperty] = useState(null)
 
-    console.log(id)
-
     useEffect(() => {
         async function fetchData() {
             const data = await fetch(`http://localhost:8080/api/properties/${id}`)
-            if (data.status === 404) {
+            if (!data.ok) {
                 navigate('/error')
+                return
             } else {
                 const parsedData = await data.json()
                 setProperty(parsedData)
