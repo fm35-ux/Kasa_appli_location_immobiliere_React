@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react';
-import Collapse from './Collapse';
+import Collapse from '../components/Collapse/Collapse';
 
 describe('Collapse', () => {
     it('the content is hidden by default', () => {
