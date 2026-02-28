@@ -22,11 +22,8 @@
     font-weight: 500;
 }
 
-.nav-link-active {
+.nav-link.active {
     text-decoration: underline;
-    color: black;
-    font-size: 24px;
-    font-weight: 500;
 }
 
 /* Responsive styles */

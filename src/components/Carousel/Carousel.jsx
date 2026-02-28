@@ -14,27 +14,19 @@ function Carousel({ pictures }) {
         setIndex(index === 0 ? pictures.length - 1 : index - 1)
     }
 
-    if (pictures.length === 1) {
-        return (
-            <div className="carousel">
-                <img src={pictures[0]} alt="logement" className="carousel-img" />
-            </div>
-        )
-    }
-
     return (
         <div className="carousel">
-            <button className="carousel-arrow arrow-left" onClick={previousSlide}>
+            {pictures.length > 1 && <button className="carousel-arrow arrow-left" onClick={previousSlide}>
                 <img src={leftArrow} alt="flèche gauche" />
-            </button>
+            </button>}
 
             <img src={pictures[index]} alt="logement" className="carousel-img" />
 
-            <button className="carousel-arrow arrow-right" onClick={nextSlide}>
+            {pictures.length > 1 && <button className="carousel-arrow arrow-right" onClick={nextSlide}>
                 <img src={rightArrow} alt="flèche droite" />
-            </button>
+            </button>}
 
-            <span className="carousel-counter">{index + 1}/{pictures.length}</span>
+            {pictures.length > 1 && <span className="carousel-counter">{index + 1}/{pictures.length}</span>}
         </div>
     )
 }
