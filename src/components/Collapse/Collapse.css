@@ -21,6 +21,22 @@
 .collapse-arrow {
     width: 30px;
     height: 30px;
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+}
+
+.collapse-arrow.rotate {
+    transform: rotate(-180deg);
+}
+
+.collapse-content-wrapper {
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    max-height: 0;
+}
+
+.collapse-content-wrapper.open {
+    max-height: 1000px;
 }
 
 .collapse-content {
@@ -59,5 +75,9 @@
     .collapse-arrow {
         width: 20px;
         height: 20px;
+    }
+
+    .collapse-content-wrapper.open {
+        max-height: 500px;
     }
 }

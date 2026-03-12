@@ -3,10 +3,12 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Collapse from '../components/Collapse/Collapse';
 
 describe('Collapse', () => {
-    it('the content is hidden by default', () => {
+    it('displays the title and hides the content by default', () => {
         render(<Collapse title="Description" content="Contenu de la description" />)
         const title = screen.getByText('Description');
         expect(title).toBeInTheDocument();
+        const content = screen.queryByText('Contenu de la description');
+        expect(content).not.toBeInTheDocument();
     })
 
     it('displays the content after a click', () => {
